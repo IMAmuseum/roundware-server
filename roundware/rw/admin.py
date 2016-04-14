@@ -66,19 +66,26 @@ def project_restricted_queryset_through(model_class, field_name):
         authorized_objects = model_class.objects.filter(
             project__in=accessible_projects)
         return qset.filter(**{field_name + "__in": authorized_objects})
+
     return get_queryset
 
 
 class ProjectProtectedThroughAssetModelAdmin(admin.ModelAdmin):
-    queryset = project_restricted_queryset_through(Asset, 'asset')
+
+    def get_queryset(self, request):
+        return project_restricted_queryset_through(Asset, 'asset')(self, request)
 
 
 class ProjectProtectedThroughSessionModelAdmin(admin.ModelAdmin):
-    queryset = project_restricted_queryset_through(Session, 'session')
+
+    def get_queryset(self, request):
+        return project_restricted_queryset_through(Session, 'session')(self, request)
 
 
 class ProjectProtectedThroughUIModelAdmin(admin.ModelAdmin):
-    queryset = project_restricted_queryset_through(MasterUI, 'master_ui')
+
+    def get_queryset(self, request):
+        return project_restricted_queryset_through(MasterUI, 'master_ui')(self, request)
 
 
 class ProjectProtectedModelAdmin(admin.ModelAdmin):

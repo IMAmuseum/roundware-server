@@ -51,6 +51,10 @@ pip install -U pip
 # Install RoundWare requirements
 pip install -r $CODE_PATH/requirements.txt --upgrade
 
+# Loaded in roundware/settings/common.py
+# django-admin-bootstrapped==2.5.7
+pip install ~/roundware-server/files/django-admin-bootstrapped-1.9-compatible-master.zip --upgrade
+
 # Apply patch to fix M2M field deserializing for Tag relationships, force command to return true.
 # Details: https://code.djangoproject.com/ticket/17946
 # TODO: Remove when fixed in Django core, probably when upgrading to Django 1.8.
