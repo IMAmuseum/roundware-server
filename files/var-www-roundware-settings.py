@@ -10,9 +10,9 @@ allow server customization of the stock settings.
 from roundware.settings import *
 
 # Admin account(s) to receive error log messages.
-ADMINS = (
-    ('round', 'username@example.com'),
-)
+# ADMINS = (
+#     ('round', 'username@example.com'),
+# )
 
 # The SMTP email account used for outgoing mail.
 EMAIL_HOST = 'smtp.example.com'
@@ -22,7 +22,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 # Standard Django DEBUG setting
-DEBUG = False
+DEBUG = True
 # The roundware log file /var/log/roundware detail level.
 # INFO is default. Set to DEBUG for detailed information.
 LOGGING['handlers']['file']['level'] = 'INFO'

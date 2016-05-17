@@ -7,7 +7,13 @@ from django.forms import fields
 
 fields.DateTimeField.strptime = lambda o, v, f: parser.parse(v)
 
-DEBUG = False
+INTERNAL_IPS = [
+    "10.2.1.213"
+]
+
+DEBUG = True
+TEMPLATE_DEBUG = False
+
 # True when unit tests are running. Used by roundwared.recording_collection
 TESTING = False
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
@@ -76,7 +82,7 @@ EMAIL_USE_TLS = True
 
 STARTUP_NOTIFICATION_MESSAGE = ""
 # Number of seconds to ban an asset/recording from playing again
-BANNED_TIMEOUT_LIMIT = 1800
+BANNED_TIMEOUT_LIMIT = 1
 ######## END ROUNDWARE SPECIFIC SETTINGS #########
 
 # change this to reflect your environment
