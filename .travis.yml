@@ -17,7 +17,6 @@ install:
   - sudo su - postgres -c "psql roundware -c 'create extension postgis'"
   - pip install -r requirements/dev.txt
   - pip install files/django-admin-bootstrapped-1.9-compatible-master.zip
-# Experiment
   - sudo apt-get install --reinstall python-setuptools
 before_script:
 # Setup Roundware log file.

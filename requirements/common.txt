@@ -42,4 +42,4 @@ fiona
 # geographic extensions for djangorestframework-gis
 djangorestframework-gis==0.10.1
 # leaflet map utilities for django admin
-django-leaflet
+django-leaflet==0.18.0

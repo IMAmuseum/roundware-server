@@ -48,7 +48,7 @@ export PYTHONPATH=$CODE_PATH
 # Install upgrade pip
 pip install -U pip
 
-# Install RoundWare requirements
+# Install Roundware requirements
 pip install -r $CODE_PATH/requirements.txt --upgrade
 
 # Loaded in roundware/settings/common.py
