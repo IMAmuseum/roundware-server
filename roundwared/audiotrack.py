@@ -123,6 +123,10 @@ class AudioTrack:
                 max(self.settings.maxduration,
                     gst.SECOND)))
 
+        # TODO: Make this more dynamic
+        duration = self.current_recording.audiolength
+
+
         start = random.randint(
             0,
             self.current_recording.audiolength - duration)
@@ -224,6 +228,14 @@ class AudioTrack:
             self.clean_up()
         else:
             logger.debug("skip_ahead: no src_wav_file")
+
+    def pause(self):
+        logger.debug("pausing asset")
+        self.pipeline.set_state(gst.State.PAUSED)
+
+    def unpause(self):
+        logger.debug("unpausing asset")
+        self.pipeline.set_state(gst.State.PLAYING)
 
     def play_asset(self, asset_id):
         logger.debug("AudioTrack play asset: " + str(asset_id))

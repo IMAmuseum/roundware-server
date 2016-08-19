@@ -89,6 +89,18 @@ class RoundStream:
         for track in self.audiotracks:
             track.skip_ahead()
 
+    def pause(self):
+        logger.info("Session %s - Pausing stream", self.sessionid)
+        self.pipeline.set_state(gst.STATE_PAUSED)
+        #for track in self.audiotracks:
+        #    track.pause()
+
+
+    def unpause(self):
+        logger.info("Session %s - Unpausing stream", self.sessionid)
+        for track in self.audiotracks:
+            track.unpause()
+
     # Sets the activity timestamp to right now.
     # The timestamp is used to detect
     # when the client last sent any message.

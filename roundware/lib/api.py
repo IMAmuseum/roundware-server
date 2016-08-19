@@ -380,6 +380,30 @@ def skip_ahead(request, session_id=None):
     dbus_send.emit_stream_signal(int(session_id), "skip_ahead", "")
     return {"success": True}
 
+def pause(request, session_id=None):
+    if session_id is None:
+        session_id = request.GET.get('session_id', None)
+    if session_id is None:
+        raise RoundException("a session_id is required for this operation")
+
+    logger.debug("pausing")
+    log_event("pause", int(session_id))
+
+    dbus_send.emit_stream_signal(int(session_id), "pause", "")
+    return {"success": True}
+
+
+def unpause(request, session_id=None):
+    if session_id is None:
+        session_id = request.GET.get('session_id', None)
+    if session_id is None:
+        raise RoundException("a session_id is required for this operation")
+
+    logger.debug("unpausing")
+    log_event("unpause", int(session_id))
+
+    dbus_send.emit_stream_signal(int(session_id), "unpause", "")
+    return {"success": True}
 
 def check_for_single_audiotrack(session_id):
     ret = False
