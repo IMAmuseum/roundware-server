@@ -55,8 +55,15 @@ def play_asset_in_stream(request):
     if 'asset_id' not in form:
         raise RoundException(
             "an asset_id is required for this operation")
+
+    # Check if asset exists
+    if not models.UIGroup.objects.filter(id=form['asset_id']):
+        raise RoundException(
+            "no asset found with this asset_id")
+
     dbus_send.emit_stream_signal(
         int(form['session_id']), "play_asset", arg_hack)
+
     return {"success": True}
 
 
