@@ -417,16 +417,16 @@ def pause(request, session_id=None):
     return {"success": True}
 
 
-def unpause(request, session_id=None):
+def resume(request, session_id=None):
     if session_id is None:
         session_id = request.GET.get('session_id', None)
     if session_id is None:
         raise RoundException("a session_id is required for this operation")
 
-    logger.debug("unpausing")
-    log_event("unpause", int(session_id))
+    logger.debug("resuming")
+    log_event("resume", int(session_id))
 
-    dbus_send.emit_stream_signal(int(session_id), "unpause", "")
+    dbus_send.emit_stream_signal(int(session_id), "resume", "")
     return {"success": True}
 
 def check_for_single_audiotrack(session_id):

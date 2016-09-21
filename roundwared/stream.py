@@ -96,10 +96,10 @@ class RoundStream:
         #    track.pause()
 
 
-    def unpause(self):
+    def resume(self):
         logger.info("Session %s - Unpausing stream", self.sessionid)
         for track in self.audiotracks:
-            track.unpause()
+            track.resume()
 
     # Sets the activity timestamp to right now.
     # The timestamp is used to detect

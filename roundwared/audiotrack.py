@@ -233,8 +233,8 @@ class AudioTrack:
         logger.debug("pausing asset")
         self.pipeline.set_state(gst.State.PAUSED)
 
-    def unpause(self):
-        logger.debug("unpausing asset")
+    def resume(self):
+        logger.debug("resuming asset")
         self.pipeline.set_state(gst.State.PLAYING)
 
     def play_asset(self, asset_id):
