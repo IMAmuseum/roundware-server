@@ -380,6 +380,30 @@ def skip_ahead(request, session_id=None):
     dbus_send.emit_stream_signal(int(session_id), "skip_ahead", "")
     return {"success": True}
 
+def play(form):
+
+    session_id = int(form['session_id'])
+    request = form_to_request(form)
+    arg_hack = json.dumps(request)
+
+    log_event("play_asset_in_stream", session_id, form)
+
+    if 'session_id' not in form:
+        raise RoundException("a session_id is required for this operation")
+    if not check_for_single_audiotrack(form.get('session_id')):
+        raise RoundException("this operation is only valid for projects with 1 audiotrack")
+    if 'asset_id' not in form:
+        raise RoundException("an asset_id is required for this operation")
+
+    # Check if asset exists
+    if not models.UIGroup.objects.filter(id=form['asset_id']):
+        raise RoundException("no asset found with this asset_id")
+
+    dbus_send.emit_stream_signal(session_id, "play_asset", arg_hack)
+
+    return {"success": True}
+
+
 def pause(request, session_id=None):
     if session_id is None:
         session_id = request.GET.get('session_id', None)

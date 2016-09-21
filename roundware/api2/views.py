@@ -15,7 +15,7 @@ from roundware.api2.filters import (EventFilterSet, AssetFilterSet, ListeningHis
 from roundware.lib.api import (get_project_tags_new as get_project_tags, modify_stream, move_listener, heartbeat,
                                skip_ahead, pause, unpause, add_asset_to_envelope, get_current_streaming_asset,
                                save_asset_from_request, vote_asset,
-                               vote_count_by_asset, log_event)
+                               vote_count_by_asset, log_event, play)
 from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated, DjangoObjectPermissions
 from rest_framework.response import Response
@@ -323,6 +323,14 @@ class StreamViewSet(viewsets.ViewSet):
         try:
             heartbeat(request, session_id=pk)
             return Response()
+        except Exception as e:
+            return Response({"detail": str(e)},
+                            status.HTTP_400_BAD_REQUEST)
+
+    @detail_route(methods=['post'])
+    def play(self, request, pk=None):
+        try:
+            return Response( play(request.POST) )
         except Exception as e:
             return Response({"detail": str(e)},
                             status.HTTP_400_BAD_REQUEST)
