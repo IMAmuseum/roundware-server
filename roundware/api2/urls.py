@@ -5,6 +5,7 @@
 from __future__ import unicode_literals
 from django.conf.urls import url, include
 from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken import views as rest_framework_views
 from roundware.api2 import views
 import logging
 logger = logging.getLogger(__name__)
@@ -28,5 +29,6 @@ router.register(r'uiitems', views.UIItemViewSet)
 
 
 urlpatterns = [
+    url(r'^login/$', rest_framework_views.obtain_auth_token, name='login'),
     url(r'^', include(router.urls)),
 ]
